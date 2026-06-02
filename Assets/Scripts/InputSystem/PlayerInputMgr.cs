@@ -17,7 +17,12 @@ public class PlayerInputMgr : Singleton<PlayerInputMgr>
         BasicAttack,
         WallSlider,
         DownPlatform,
-        Save,
+        Interact,
+    }
+
+    public enum UIInputType
+    {
+        Interact,
     }
 
     private struct PreInput
@@ -54,7 +59,7 @@ public class PlayerInputMgr : Singleton<PlayerInputMgr>
         input = player.input;
     }
 
-    public bool ListenInput(PlayerInputType type)
+    public bool ListenPlayerInput(PlayerInputType type)
     {
         switch (type)
         {
@@ -98,8 +103,23 @@ public class PlayerInputMgr : Singleton<PlayerInputMgr>
                     return true;
                 }
                 return false;
-            case PlayerInputType.Save:
-                if (input.Player.Save.WasPressedThisFrame())
+            case PlayerInputType.Interact:
+                if (input.Player.Interact.WasPressedThisFrame())
+                {
+                    return true;
+                }
+                return false;
+            default:
+                return false;
+        }
+    }
+
+    public bool ListenUIInput(UIInputType type)
+    {
+        switch (type)
+        {
+            case UIInputType.Interact:
+                if (input.UI.DialogueInteract.WasPressedThisFrame())
                 {
                     return true;
                 }
@@ -117,7 +137,7 @@ public class PlayerInputMgr : Singleton<PlayerInputMgr>
 
     public void RecordInput(PlayerInputType type, float dur = 0.1f)
     {
-        if (ListenInput(type))
+        if (ListenPlayerInput(type))
         {
             inputMap[type] = new PreInput(type, Time.time, dur);
         }

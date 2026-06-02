@@ -31,7 +31,6 @@ public class WayPoint : MonoBehaviour
         if (waypointType == RespawnType.Enter)
         {
             connWaypoint = RespawnType.Exit;
-            canBeTrigger = false;
         }
         if (waypointType == RespawnType.Exit)
             connWaypoint = RespawnType.Enter;

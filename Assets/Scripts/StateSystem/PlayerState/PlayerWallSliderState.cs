@@ -29,13 +29,13 @@ public class PlayerWallSliderState : PlayerState
         base.Update();
         if (!stateActive)
             return;
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.WallJump))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.WallJump))
         {
             Controller.ChangeState(Player.PlayerState.WallJump);
             return;
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Move))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Move))
             Controller.WallLeave();
         if (Controller.grabEdge)
             Controller.WallSlider();

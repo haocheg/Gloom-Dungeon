@@ -33,7 +33,7 @@ public class PlayerGroundState : PlayerState
         //base.Update();
         InputMgr.RecordInput(PlayerInputMgr.PlayerInputType.Jump);
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Jump))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Jump))
         {
             Controller.ChangeState(Player.PlayerState.JumpState);
             return;

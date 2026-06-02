@@ -29,13 +29,13 @@ public class PlayerJumpAttackState : PlayerState
 
     public override void Update()
     {
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
         {
             Controller.ChangeState(Player.PlayerState.DashState);
             return;
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Jump) && Controller.TryConsumeDoubleJump())
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Jump) && Controller.TryConsumeDoubleJump())
         {
             Controller.ChangeState(Player.PlayerState.JumpState);
             return;

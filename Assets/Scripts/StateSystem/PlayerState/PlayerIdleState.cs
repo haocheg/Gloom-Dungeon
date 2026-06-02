@@ -33,13 +33,13 @@ public class PlayerIdleState : PlayerGroundState
         base.Update();
         if (!stateActive)
             return;
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
         {
             Controller.ChangeState(Player.PlayerState.DashState);
             return;
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.DownPlatform))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.DownPlatform))
         {
             Controller.PenetratePlatform(0.2f);
             Controller.ChangeState(Player.PlayerState.FallState);
@@ -54,13 +54,13 @@ public class PlayerIdleState : PlayerGroundState
         }
 
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.BasicAttack))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.BasicAttack))
         {
             Controller.ChangeState(Player.PlayerState.BasicAttack);
             return;
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Move))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Move))
         {
             if (Controller.isTouchWall && Controller.moveInput.x == Controller.facingDir)
                 return;

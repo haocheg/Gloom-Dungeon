@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
         LoadManager("LevelManager");
         LoadManager("AudioManager", () => AudioManager.Instance.PlayBGM("musicRegular"));
         LoadManager("ShopManager");
+        LoadManager("NPCManager");
+        LoadManager("DialogueManager");
         EventCenter.Instance.AddEventListener<bool>(E_TheEvent.E_PlayerDeath, OnPlayerDeath);
         EventCenter.Instance.AddEventListener(E_TheEvent.E_GameOver, GameOver);
     }

@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Save",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "c81dda32-56f0-4c37-b7b6-4ceb9ecf6139",
                     "expectedControlType": "",
@@ -198,29 +198,35 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
-                    "action": "Save",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "7a517d0a-894a-42e4-9f85-2a2348e480d4",
+            "actions": [
+                {
+                    "name": "DialogueInteract",
+                    "type": "Button",
+                    "id": "2192b7d7-16a4-42a3-9921-4e305b00583a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
                 {
                     "name": "",
-                    "id": "8ea2d451-5a40-41ac-9400-7f011470ea42",
-                    "path": "<Mouse>/leftButton",
+                    "id": "b1e2ff9a-2107-4644-a00e-aa85ade83d91",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
-                    "action": "Save",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2a3a3029-1179-4fb5-a8aa-0073336c2eaf",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard & Mouse",
-                    "action": "Save",
+                    "action": "DialogueInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

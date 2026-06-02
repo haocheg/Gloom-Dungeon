@@ -19,12 +19,6 @@ public enum E_TheEvent
 
     E_PlayerHealthChange,
 
-    E_AddScore,
-
-    E_GetScore,
-
-    E_TransmitScore,
-
     E_GameOver,
 
     E_ItemSpawn,

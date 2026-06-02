@@ -22,7 +22,6 @@ public class LevelManager : MonoBehaviour
     public string curLevelName;
     [SerializeField] private int curCheckPoint;
     [SerializeField] private CheckPointInfo checkPointInfo;
-    [SerializeField] private ItemSpawnInfo itemPointInfo;
     [SerializeField] private List<Transform> itemSpawnPoints;
     [SerializeField] private GameObject itemPrefabOnEnemyDie;
     private Dictionary<int, string> checkPointDic;
@@ -54,15 +53,6 @@ public class LevelManager : MonoBehaviour
             }
         }
         curCheckPoint = DefaultCheckPoint;
-
-        itemPointDic = new Dictionary<string, int>();
-        if (itemPointInfo != null && itemPointInfo.itemSpawnDatas != null)
-        {
-            foreach (ItemSpawnData data in itemPointInfo.itemSpawnDatas)
-            {
-                itemPointDic.Add(data.sceneName, data.count);
-            }
-        }
     }
 
     private void Start()

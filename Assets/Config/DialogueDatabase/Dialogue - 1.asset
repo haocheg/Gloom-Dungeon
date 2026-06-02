@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe62d838bcc23394b8659c05ce4e7792, type: 3}
+  m_Name: Dialogue - 1
+  m_EditorClassIdentifier: 
+  dialogueID: 1
+  npcID: 1
+  startNode: {fileID: 11400000, guid: 41ce7b0fc63f1494996d736f2e113434, type: 2}
+  allDialogueNode:
+  - {fileID: 11400000, guid: 41ce7b0fc63f1494996d736f2e113434, type: 2}
+  - {fileID: 11400000, guid: 3a7d61524b0716f4aba8754acaec891a, type: 2}
+  - {fileID: 11400000, guid: da76c85d82755654faa843ee8f51852b, type: 2}
+  - {fileID: 11400000, guid: e93a09d5d9bfd504aacdade23a619235, type: 2}
+  - {fileID: 11400000, guid: 585ca85672387ca418732d89b35a12fd, type: 2}
+  - {fileID: 11400000, guid: af8c818c30d69dd4fae788276d270a4a, type: 2}
+  - {fileID: 11400000, guid: 64f066dbd6092d347b0ff4ed2db1701e, type: 2}
+  - {fileID: 11400000, guid: 2fea10c4351de9c4e9208c99739f2a54, type: 2}

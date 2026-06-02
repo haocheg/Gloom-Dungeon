@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be79f6ac0952d9544b84d461014a3178, type: 3}
+  m_Name: DialogueNode - 7
+  m_EditorClassIdentifier: 
+  NodeID: 7
+  content: "\u8FD9\u4E9B\u8D27\u662F\u4ECE\u4E1C\u90E8\u738B\u56FD\u8FD0\u6765\u7684\uFF0C\u90FD\u662F\u597D\u54C1\u8D28\u3002"
+  hasChoices: 1
+  choices:
+  - choiceText: "\u6211\u60F3\u4E70\u70B9\u4E1C\u897F"
+    targetNodeID: 3
+  - choiceText: "\u6211\u80FD\u5356\u70B9\u4E1C\u897F\u5417\uFF1F"
+    targetNodeID: 4
+  - choiceText: "\u4EE5\u540E\u518D\u804A\u5427\uFF5E"
+    targetNodeID: 5
+  nextNodeID: -1
+  eventTrigger: 0
+  randomNext: 0
+  isPlaceholder: 0
+  randomNextID: 

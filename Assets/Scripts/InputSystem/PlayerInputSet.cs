@@ -82,7 +82,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Save"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""c81dda32-56f0-4c37-b7b6-4ceb9ecf6139"",
                     ""expectedControlType"": """",
@@ -220,29 +220,35 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard & Mouse"",
-                    ""action"": ""Save"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""7a517d0a-894a-42e4-9f85-2a2348e480d4"",
+            ""actions"": [
+                {
+                    ""name"": ""DialogueInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""2192b7d7-16a4-42a3-9921-4e305b00583a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""8ea2d451-5a40-41ac-9400-7f011470ea42"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""b1e2ff9a-2107-4644-a00e-aa85ade83d91"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard & Mouse"",
-                    ""action"": ""Save"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2a3a3029-1179-4fb5-a8aa-0073336c2eaf"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard & Mouse"",
-                    ""action"": ""Save"",
+                    ""action"": ""DialogueInteract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -276,12 +282,16 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Down = m_Player.FindAction("Down", throwIfNotFound: true);
-        m_Player_Save = m_Player.FindAction("Save", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_DialogueInteract = m_UI.FindAction("DialogueInteract", throwIfNotFound: true);
     }
 
     ~@PlayerInputSet()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputSet.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInputSet.UI.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -349,7 +359,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Down;
-    private readonly InputAction m_Player_Save;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerInputSet m_Wrapper;
@@ -360,7 +370,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Down => m_Wrapper.m_Player_Down;
-        public InputAction @Save => m_Wrapper.m_Player_Save;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -388,9 +398,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Down.started += instance.OnDown;
             @Down.performed += instance.OnDown;
             @Down.canceled += instance.OnDown;
-            @Save.started += instance.OnSave;
-            @Save.performed += instance.OnSave;
-            @Save.canceled += instance.OnSave;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -413,9 +423,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @Down.started -= instance.OnDown;
             @Down.performed -= instance.OnDown;
             @Down.canceled -= instance.OnDown;
-            @Save.started -= instance.OnSave;
-            @Save.performed -= instance.OnSave;
-            @Save.canceled -= instance.OnSave;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -433,6 +443,52 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_DialogueInteract;
+    public struct UIActions
+    {
+        private @PlayerInputSet m_Wrapper;
+        public UIActions(@PlayerInputSet wrapper) { m_Wrapper = wrapper; }
+        public InputAction @DialogueInteract => m_Wrapper.m_UI_DialogueInteract;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @DialogueInteract.started += instance.OnDialogueInteract;
+            @DialogueInteract.performed += instance.OnDialogueInteract;
+            @DialogueInteract.canceled += instance.OnDialogueInteract;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @DialogueInteract.started -= instance.OnDialogueInteract;
+            @DialogueInteract.performed -= instance.OnDialogueInteract;
+            @DialogueInteract.canceled -= instance.OnDialogueInteract;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -450,6 +506,10 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
-        void OnSave(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnDialogueInteract(InputAction.CallbackContext context);
     }
 }

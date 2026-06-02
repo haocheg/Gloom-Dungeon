@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d75a8f6a2406345ae85a67399f4a27, type: 3}
+  m_Name: NPCDefine
+  m_EditorClassIdentifier: 
+  Datas:
+  - NPCName: Bob
+    NPCID: 1
+    DialogueID: 1
+    FullPortrait: {fileID: 1105193851, guid: 9f069c7c2bd74e148acb9fdf344c5fac, type: 3}
+    Portrait: {fileID: -664824709, guid: 474ae984bbadfe542ae0190550fd124f, type: 3}
+  - NPCName: Joe
+    NPCID: 2
+    DialogueID: 0
+    FullPortrait: {fileID: -1983849616, guid: 9f069c7c2bd74e148acb9fdf344c5fac, type: 3}
+    Portrait: {fileID: -251472703, guid: 474ae984bbadfe542ae0190550fd124f, type: 3}

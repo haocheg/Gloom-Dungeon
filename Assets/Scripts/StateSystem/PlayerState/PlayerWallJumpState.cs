@@ -30,24 +30,24 @@ public class PlayerWallJumpState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
         {
             Controller.ChangeState(Player.PlayerState.DashState);
             return;
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Jump) && Controller.TryConsumeDoubleJump())
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Jump) && Controller.TryConsumeDoubleJump())
         {
             Controller.ChangeState(Player.PlayerState.JumpState);
             return;
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Move) && stateTimer < 0.0f)
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Move) && stateTimer < 0.0f)
         {
             Controller.Move();
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.BasicAttack))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.BasicAttack))
         {
             Controller.ChangeState(Player.PlayerState.JumpAttack);
             return;

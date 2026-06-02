@@ -29,12 +29,12 @@ public class PlayerEdgeHangState : PlayerState
     {
         base.Update();
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Move))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Move))
             Controller.WallLeave();
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Jump))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Jump))
             Controller.ChangeState(Player.PlayerState.JumpState);
-        else if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.WallSlider) && Controller.canWallSlider)
+        else if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.WallSlider) && Controller.canWallSlider)
             Controller.ChangeState(Player.PlayerState.WallSlider);
         else if (!Controller.isOnGround && !Controller.grabEdge)
             Controller.ChangeState(Player.PlayerState.FallState);

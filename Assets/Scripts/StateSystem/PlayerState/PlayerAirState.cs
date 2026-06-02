@@ -28,25 +28,25 @@ public class PlayerAirState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
         {
             Controller.ChangeState(Player.PlayerState.DashState);
             return;
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Jump) && Controller.TryConsumeDoubleJump())
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Jump) && Controller.TryConsumeDoubleJump())
         {
             Controller.ChangeState(Player.PlayerState.JumpState);
             return;
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.BasicAttack))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.BasicAttack))
         {
             Controller.ChangeState(Player.PlayerState.JumpAttack);
             return;
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Move))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Move))
             Controller.Move();
         Controller.JumpOrFallAnim();
     }

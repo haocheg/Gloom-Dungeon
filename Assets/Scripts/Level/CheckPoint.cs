@@ -12,6 +12,7 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private bool isPlayerInside = false;
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private int pointIndex;
+    [SerializeField] private Hint hint;
 
     private void OnValidate()
     {
@@ -31,20 +32,27 @@ public class CheckPoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (canBeTrigger && collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
             isPlayerInside = true;
+            if (hint != null) hint.ShowHint();
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (canBeTrigger && collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
             isPlayerInside = false;
+            if (hint != null) hint.HideHint();
+        }
     }
 
     private void Update()
     {
         if (canBeTrigger && isPlayerInside)
         {
-            if (PlayerInputMgr.Instance.ListenInput(PlayerInputMgr.PlayerInputType.Save))
+            if (PlayerInputMgr.Instance.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Interact))
             {
                 LevelManager.Instance.SaveCheckPoint(pointIndex);
             }

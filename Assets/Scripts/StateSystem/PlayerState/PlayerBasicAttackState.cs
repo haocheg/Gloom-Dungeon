@@ -52,7 +52,7 @@ public class PlayerBasicAttackState : PlayerState
     {
         base.Update();
         AttackMove();
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
         {
             Controller.ChangeState(Player.PlayerState.DashState);
             return;

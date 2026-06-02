@@ -64,9 +64,13 @@ public partial class PlayerController
     public void EnableOrDisableInput(bool isEnable)
     {
         if (isEnable)
-            input.Enable();
+        {
+            input.Player.Enable();
+        }
         else
-            input.Disable();
+        {
+            input.Player.Disable();
+        }
     }
 
     public void KeepPlayer()

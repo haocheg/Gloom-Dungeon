@@ -12,28 +12,18 @@ public class MainPanel : BasePanel
 {
     [SerializeField] private int curHP;
     [SerializeField] private Button MenuButton;
-    [SerializeField] private Button ShopButton;
     [SerializeField] private Transform parent;
-    [SerializeField] private TextMeshProUGUI emeraldCount;
     [SerializeField] private List<GameObject> Icons = new List<GameObject>();
     private void Start()
     {
         MenuButton.onClick.AddListener(OnMenuButtonClick);
-        ShopButton.onClick.AddListener(OnShopButtonClick);
         EventCenter.Instance.AddEventListener<int>(E_TheEvent.E_PlayerHealthChange, OnHealthChange);
-        EventCenter.Instance.AddEventListener<int>(E_TheEvent.E_TransmitScore, UpdateScore);
     }
 
     private void OnMenuButtonClick()
     {
         AudioManager.Instance.PlaySFX("buttonClick");
         UIManager.Instance.ShowPanel<MenuPanel>();
-    }
-
-    private void OnShopButtonClick()
-    {
-        AudioManager.Instance.PlaySFX("buttonClick");
-        UIManager.Instance.ShowPanel<ShopPanel>();
     }
 
     private void OnHealthChange(int value)
@@ -59,11 +49,6 @@ public class MainPanel : BasePanel
         }
     }
 
-    private void UpdateScore(int v = 0)
-    {
-        emeraldCount.text = ": " + v.ToString();
-    }
-
     public override void HideMe()
     {
 
@@ -72,16 +57,13 @@ public class MainPanel : BasePanel
     public override void ShowMe()
     {
         curHP = PlayerService.Instance.GetHealthValue();
-        EventCenter.Instance.EventTrigger(E_TheEvent.E_GetScore);
         UpdateHP();
     }
 
     private void OnDestroy()
     {
         MenuButton.onClick.RemoveListener(OnMenuButtonClick);
-        ShopButton.onClick.RemoveListener(OnShopButtonClick);
         EventCenter.Instance.RemoveEventListener<int>(E_TheEvent.E_PlayerHealthChange, OnHealthChange);
-        EventCenter.Instance.RemoveEventListener<int>(E_TheEvent.E_TransmitScore, UpdateScore);
     }
 
 }

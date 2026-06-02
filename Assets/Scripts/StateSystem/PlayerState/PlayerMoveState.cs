@@ -33,7 +33,7 @@ public class PlayerMoveState : PlayerGroundState
         if (!stateActive)
             return;
         Controller.Move();
-        if (!InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Move) || Controller.isTouchWall)
+        if (!InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Move) || Controller.isTouchWall)
         {
             stateTimer -= Time.deltaTime;
             if (stateTimer < 0)
@@ -44,13 +44,13 @@ public class PlayerMoveState : PlayerGroundState
         }
         else
             stateTimer = moveDur;
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.Dash) && Controller.CanDash())
         {
             Controller.ChangeState(Player.PlayerState.DashState);
             return;
         }
 
-        if (InputMgr.ListenInput(PlayerInputMgr.PlayerInputType.BasicAttack))
+        if (InputMgr.ListenPlayerInput(PlayerInputMgr.PlayerInputType.BasicAttack))
         {
             Controller.ChangeState(Player.PlayerState.BasicAttack);
             return;

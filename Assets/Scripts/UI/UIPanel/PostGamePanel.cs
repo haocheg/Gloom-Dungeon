@@ -12,15 +12,12 @@ public class PostGamePanel : BasePanel
     [SerializeField] private Button RestartButton;
     [SerializeField] private Button StartOverButton;
     [SerializeField] private Button BackButton;
-    [SerializeField] private TextMeshProUGUI scoreText;
 
     private void Start()
     {
         RestartButton.onClick.AddListener(OnRestartButtonClick);
         StartOverButton.onClick.AddListener(OnStartOverButtonClick);
         BackButton.onClick.AddListener(OnBackButtonClick);
-        EventCenter.Instance.AddEventListener<int>(E_TheEvent.E_TransmitScore, GetScore);
-        EventCenter.Instance.EventTrigger(E_TheEvent.E_GetScore);
     }
 
     private void OnRestartButtonClick()
@@ -56,11 +53,6 @@ public class PostGamePanel : BasePanel
         });
     }
 
-    private void GetScore(int v = 0)
-    {
-        scoreText.text = "获得分数: " + v.ToString();
-    }
-
 
     public override void HideMe()
     {
@@ -77,7 +69,6 @@ public class PostGamePanel : BasePanel
         RestartButton.onClick.RemoveListener(OnRestartButtonClick);
         StartOverButton.onClick.RemoveListener(OnStartOverButtonClick);
         BackButton.onClick.RemoveListener(OnBackButtonClick);
-        EventCenter.Instance.RemoveEventListener<int>(E_TheEvent.E_TransmitScore, GetScore);
     }
 
 }
