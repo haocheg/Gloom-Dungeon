@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 /// Title:
 /// Description:
 /// </summary>
-public class DialogueChoiceItem : MonoBehaviour
+public class DialogueChoiceItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private TextMeshProUGUI choiceText;
     [SerializeField] private Button choiceButton;
@@ -37,20 +38,18 @@ public class DialogueChoiceItem : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-
-    private void OnMouseEnter()
-    {
-        choiceText.color = Color.yellow;
-    }
-
-    private void OnMouseExit()
-    {
-        choiceText.color = Color.white;
-    }
-
     private void OnDestroy()
     {
         choiceButton.onClick.RemoveListener(OnChoiceButtonClick);
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        choiceText.color = Color.yellow;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        choiceText.color = Color.white;
+    }
 }

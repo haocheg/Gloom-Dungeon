@@ -23,9 +23,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int curCheckPoint;
     [SerializeField] private CheckPointInfo checkPointInfo;
     [SerializeField] private List<Transform> itemSpawnPoints;
-    [SerializeField] private GameObject itemPrefabOnEnemyDie;
     private Dictionary<int, string> checkPointDic;
-    private Dictionary<string, int> itemPointDic;
     private CheckPoint[] checkPoints;
     private static int DefaultCheckPoint = 0;
 
@@ -57,18 +55,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        EventCenter.Instance.AddEventListener<Vector3>(E_TheEvent.E_IsEnemyDie, SpawnRewardItem);
-    }
 
-    private void SpawnRewardItem(Vector3 pos)
-    {
-        if (itemPrefabOnEnemyDie != null)
-            Instantiate(itemPrefabOnEnemyDie, pos, Quaternion.identity);
-    }
-
-    private void SpawnItem()
-    {
-        EventCenter.Instance.EventTrigger(E_TheEvent.E_ItemSpawn);
     }
 
     public void RespawnPlayer(RespawnType type, UnityAction callBack = null)
@@ -114,7 +101,6 @@ public class LevelManager : MonoBehaviour
 
         yield return null;
         GameManager.Instance.ChangeScene();
-        SpawnItem();
         PoolManager.Instance.ClearAllPool();
         yield return new WaitForSeconds(1.5f);
         UIManager.Instance.HidePanel<FadePanel>();

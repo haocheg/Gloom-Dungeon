@@ -17,7 +17,7 @@ public enum E_TheEvent
 
     E_PlayerDeath,
 
-    E_PlayerHealthChange,
+    E_GetPlayerHPPercent,
 
     E_GameOver,
 
@@ -30,5 +30,9 @@ public enum E_TheEvent
     E_ChangeScene,
 
     E_IsEnemyDie,
+
+    E_GetPlayerHPRequest,
+
+    E_GetPlayerHPResponse,
 
 }

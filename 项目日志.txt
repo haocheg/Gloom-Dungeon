@@ -1,0 +1,4 @@
+2026.06.09
+	1.重做了MainPanel，添加了血条，并给血条添加缓动。
+	2.重构了玩家数据存储结构，PlayerStatsMgr添加LoadStats和SaveStats方法。
+	3.修复了因重构产生的Bug。

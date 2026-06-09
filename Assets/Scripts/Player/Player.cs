@@ -32,7 +32,6 @@ public class Player : Entity
         DontDestroyOnLoad(gameObject);
         PlayerInputMgr.Instance.Init(this);
         StatsManager = new PlayerStatsMgr(this);
-        Stats = EntityStatsManager.Instance.LoadData("PlayerStats");
     }
 
     private void OnEnable()

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,14 +11,16 @@ using UnityEngine.UI;
 /// </summary>
 public class MainPanel : BasePanel
 {
-    [SerializeField] private int curHP;
     [SerializeField] private Button MenuButton;
-    [SerializeField] private Transform parent;
-    [SerializeField] private List<GameObject> Icons = new List<GameObject>();
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private float smoothTime = 0.2f;
+    private Coroutine updateHPCoro;
+
+
     private void Start()
     {
         MenuButton.onClick.AddListener(OnMenuButtonClick);
-        EventCenter.Instance.AddEventListener<int>(E_TheEvent.E_PlayerHealthChange, OnHealthChange);
+        EventCenter.Instance.AddEventListener<float>(E_TheEvent.E_GetPlayerHPPercent, OnHealthChange);
     }
 
     private void OnMenuButtonClick()
@@ -26,27 +29,34 @@ public class MainPanel : BasePanel
         UIManager.Instance.ShowPanel<MenuPanel>();
     }
 
-    private void OnHealthChange(int value)
+    private void OnHealthChange(float value)
     {
-        curHP += value;
-        UpdateHP();
+        UpdateHP(value);
     }
 
-    private void UpdateHP()
+    private void UpdateHP(float updateHP)
     {
-        int count = curHP / 10;
-        for (int i = 0; i < Icons.Count; i++)
+        if (updateHPCoro != null)
+            StopCoroutine(updateHPCoro);
+        updateHPCoro = StartCoroutine(SmoothChangeHP(updateHP));
+    }
+
+    private IEnumerator SmoothChangeHP(float hp)
+    {
+        float start = healthSlider.value;
+        float end = hp;
+        float elapsed = 0f;
+
+        while (elapsed < smoothTime)
         {
-            Destroy(Icons[i]);
+            elapsed += Time.deltaTime;
+            float t = elapsed / smoothTime;
+            float newValue = Mathf.Lerp(start, end, t);
+            healthSlider.value = newValue;
+            yield return null;
         }
-        Icons.Clear();
-        for (int i = 0; i < count; i++)
-        {
-            GameAssetLoader.Instance.LoadPackagedAsset<GameObject>("UI", "HealthIcon", null, AssetPackageMode.EditorResources, (go) =>
-            {
-                Icons.Add(GameObject.Instantiate(go, parent));
-            });
-        }
+        healthSlider.value = end;
+        updateHPCoro = null;
     }
 
     public override void HideMe()
@@ -56,14 +66,13 @@ public class MainPanel : BasePanel
 
     public override void ShowMe()
     {
-        curHP = PlayerService.Instance.GetHealthValue();
-        UpdateHP();
+        UpdateHP(1.0f);
     }
 
     private void OnDestroy()
     {
         MenuButton.onClick.RemoveListener(OnMenuButtonClick);
-        EventCenter.Instance.RemoveEventListener<int>(E_TheEvent.E_PlayerHealthChange, OnHealthChange);
+        EventCenter.Instance.RemoveEventListener<float>(E_TheEvent.E_GetPlayerHPPercent, OnHealthChange);
     }
 
 }

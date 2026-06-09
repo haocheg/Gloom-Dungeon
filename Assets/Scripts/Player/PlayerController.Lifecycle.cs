@@ -78,7 +78,7 @@ public partial class PlayerController
         DontDestroyOnLoad(player);
     }
 
-    public void GetSkill(PlayerStats stats)
+    public void GetSkill(PlayerCurrentStats stats)
     {
         canDash = stats.canDash;
         canDoubleJump = stats.canDoubleJump;

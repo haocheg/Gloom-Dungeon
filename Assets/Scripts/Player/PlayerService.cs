@@ -61,7 +61,7 @@ public class PlayerService : Singleton<PlayerService>
         return Controller == null ? 0 : Controller.GetHealthValue();
     }
 
-    public void ApplySkill(PlayerStats stats)
+    public void ApplySkill(PlayerCurrentStats stats)
     {
         Controller?.GetSkill(stats);
     }

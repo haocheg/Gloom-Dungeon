@@ -23,7 +23,7 @@ public class TrapTrigger : MonoBehaviour
         switch (type)
         {
             case TrapType.Sprike:
-                damage = entity.Stats.maxHp;
+                damage = entity.StatsManager.GetCurHP();
                 break;
             default:
                 break;
