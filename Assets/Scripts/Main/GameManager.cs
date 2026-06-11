@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
         LoadManager("ShopManager");
         LoadManager("NPCManager");
         LoadManager("DialogueManager");
+        LoadManager("ItemManager");
+        BagManager.Instance.Init();
         EventCenter.Instance.AddEventListener<bool>(E_TheEvent.E_PlayerDeath, OnPlayerDeath);
         EventCenter.Instance.AddEventListener(E_TheEvent.E_GameOver, GameOver);
     }

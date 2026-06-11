@@ -153,30 +153,32 @@ public class DialogueManager : MonoBehaviour
     {
         panel.HideChoice();
         UIManager.Instance.HidePanel<DialoguePanel>();
+        panel = null;
+        startDialogue = false;
+        curreDialogueNode = null;
+        currentDialogue = null;
+        currentDialogueNPC = null;
         switch (dialogueEventType)
         {
             case DialogueEventType.None:
                 break;
             case DialogueEventType.OpenShop:
-                break;
+                ShopManager.Instance.OpenShop();
+                return;
             case DialogueEventType.OpenCraft:
                 break;
             case DialogueEventType.OpenQuest:
                 break;
             case DialogueEventType.GetQuestReward:
                 break;
-            case DialogueEventType.PlayerMakeChoices:
+            case DialogueEventType.OpenSaleShop:
                 break;
             case DialogueEventType.CloseDialogue:
                 break;
             default:
                 break;
         }
-        panel = null;
-        startDialogue = false;
-        curreDialogueNode = null;
-        currentDialogue = null;
-        currentDialogueNPC = null;
+
     }
 
     private void Update()

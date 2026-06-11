@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -7,59 +8,36 @@ using UnityEngine.UI;
 /// Title:
 /// Description:
 /// </summary>
-public class ShopItem : MonoBehaviour
+public class ShopItem : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private Button BuyButton;
-    [SerializeField] private TextMeshProUGUI buttonText;
-    [SerializeField] private TextMeshProUGUI valueText;
-    public bool IsBuy = false;
+    [SerializeField] private Image Icon;
+    [SerializeField] private TextMeshProUGUI Name;
+    [SerializeField] private TextMeshProUGUI Price;
+    [SerializeField] private int ItemID;
 
-    public SkillType skillType;
 
     private void Start()
     {
-        BuyButton.onClick.AddListener(OnBuyButtonClick);
+
     }
 
-    private void OnBuyButtonClick()
+    public void ShowMe(ShopViewInfo info)
     {
-        AudioManager.Instance.PlaySFX("buttonClick");
-        if (IsBuy) return;
-        EventCenter.Instance.EventTrigger<SkillType>(E_TheEvent.E_SkillBuy, skillType);
+        this.Icon.sprite = info.Icon;
+        this.Name.text = info.Name;
+        this.Price.text = info.Price.ToString();
+        this.ItemID = info.ItemID;
     }
 
-    public void SetValue(int value)
-    {
-        valueText.text = ": " + value.ToString();
-    }
-
-    public void ConfirmBuy(bool value)
-    {
-        if (value)
-        {
-            IsBuy = true;
-            buttonText.text = "ÒÑ¹ºÂò";
-            BuyButton.interactable = false;
-        }
-        else
-        {
-            IsBuy = false;
-            buttonText.text = "¹ºÂò";
-            BuyButton.interactable = true;
-        }
-    }
 
     private void OnDestroy()
     {
-        BuyButton.onClick.RemoveListener(OnBuyButtonClick);
+
     }
 
-}
-
-public enum SkillType
-{
-    Dash,
-    DoubleJump,
-    WallSlider,
-    EdgeHang,
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ShopManager.Instance.BuyItem(ItemID);
+        AudioManager.Instance.PlaySFX("buttonClick");
+    }
 }

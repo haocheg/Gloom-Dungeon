@@ -85,6 +85,7 @@ public class DialoguePanel : BasePanel
 
     public override void ShowMe()
     {
+        PlayerService.Instance.EnableInput(false);
         isDialogueEnd = false;
     }
 }

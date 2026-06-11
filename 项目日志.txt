@@ -2,3 +2,12 @@
 	1.重做了MainPanel，添加了血条，并给血条添加缓动。
 	2.重构了玩家数据存储结构，PlayerStatsMgr添加LoadStats和SaveStats方法。
 	3.修复了因重构产生的Bug。
+
+2026.06.11
+	1.添加了对话挑战，现在可以对话后跳转商店
+	2.制作了一个ShopPanel、ShopManager
+	3.创建数据结构ShopItemInfo用于配置商店道具信息
+	4.创建数据结构ItemInfo用于配置道具具体信息
+	5.创建数据结构BagItemInfo用于记录背包内的道具信息
+	6.制作了ItemManager和BagManager分别管理Item和Bag
+	7.商店系统基本完善待后续有Bug再修改

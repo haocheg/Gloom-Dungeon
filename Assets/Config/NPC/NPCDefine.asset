@@ -16,10 +16,10 @@ MonoBehaviour:
   - NPCName: Bob
     NPCID: 1
     DialogueID: 1
-    FullPortrait: {fileID: 1105193851, guid: 9f069c7c2bd74e148acb9fdf344c5fac, type: 3}
     Portrait: {fileID: -664824709, guid: 474ae984bbadfe542ae0190550fd124f, type: 3}
+    FullPortrait: {fileID: 1105193851, guid: 9f069c7c2bd74e148acb9fdf344c5fac, type: 3}
   - NPCName: Joe
     NPCID: 2
-    DialogueID: 0
-    FullPortrait: {fileID: -1983849616, guid: 9f069c7c2bd74e148acb9fdf344c5fac, type: 3}
+    DialogueID: 2
     Portrait: {fileID: -251472703, guid: 474ae984bbadfe542ae0190550fd124f, type: 3}
+    FullPortrait: {fileID: -1983849616, guid: 9f069c7c2bd74e148acb9fdf344c5fac, type: 3}

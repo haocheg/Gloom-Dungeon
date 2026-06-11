@@ -17,7 +17,7 @@ MonoBehaviour:
   hasChoices: 0
   choices: []
   nextNodeID: -1
-  eventTrigger: 1
+  eventTrigger: 3
   randomNext: 0
   isPlaceholder: 0
   randomNextID: 

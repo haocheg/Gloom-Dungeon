@@ -13,7 +13,7 @@ public class MainPanel : BasePanel
 {
     [SerializeField] private Button MenuButton;
     [SerializeField] private Slider healthSlider;
-    [SerializeField] private float smoothTime = 0.2f;
+    [SerializeField] private float smoothTime = 0.3f;
     private Coroutine updateHPCoro;
 
 

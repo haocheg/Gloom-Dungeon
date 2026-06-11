@@ -22,8 +22,8 @@ public enum DialogueEventType
     None,
     OpenShop,
     OpenCraft,
+    OpenSaleShop,
     OpenQuest,
     GetQuestReward,
-    PlayerMakeChoices,
     CloseDialogue,
 }

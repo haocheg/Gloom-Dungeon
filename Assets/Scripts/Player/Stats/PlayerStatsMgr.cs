@@ -85,6 +85,7 @@ public class PlayerStatsMgr : StatsManager
             curStats = new PlayerCurrentStats(loadstats);
             playerStats = loadstats;
             SaveStats(loadstats);
+            return;
         }
         playerStats = loadstats;
         curStats = new PlayerCurrentStats(playerStats);

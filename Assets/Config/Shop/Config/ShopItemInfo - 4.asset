@@ -10,18 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3f6be146276d3e4b868491f847d8650, type: 3}
-  m_Name: ShopItemConfig
+  m_Name: ShopItemInfo - 4
   m_EditorClassIdentifier: 
-  shopItemInfos:
-  - Type: 0
-    Value: 15
-    isBuy: 1
-  - Type: 1
-    Value: 20
-    isBuy: 0
-  - Type: 2
-    Value: 15
-    isBuy: 0
-  - Type: 3
-    Value: 10
-    isBuy: 0
+  ItemID: 4
+  Count: 1
+  ProvidedCount: 1
+  Price: 100
+  isProvided: 1
